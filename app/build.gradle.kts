@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-android")
+    id("kotlin-kapt")  // Changed from annotationProcessor to kapt
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -27,7 +30,7 @@ android {
         }
     }
     buildFeatures{
-        viewBinding = true
+        dataBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -47,6 +50,9 @@ dependencies {
     implementation("androidx.tracing:tracing-perfetto-handshake:1.0.0")
     implementation("org.chromium.net:cronet-embedded:119.6045.31")
     implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("com.google.android.datatransport:transport-runtime:3.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -68,16 +74,27 @@ dependencies {
 
     implementation ("com.shakebugs:shake:16.2.5")
 
-
     implementation ("com.squareup.okhttp3:okhttp:4.12.0")
 
-//    implementation ("com.github.jainsahab:Snooper:1.5.6@aar")
-//    implementation ("com.github.jainsahab:Snooper-Spring:1.5.5@aar")
-//    implementation ("com.github.jainsahab:Snooper-Okhttp:1.5.6@aar")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
+    //http logcat
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+    // Kotlinx Serialization dependency
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    //Editext
+    implementation("com.google.android.material:material:1.11.0")
+
+    //noinspection KaptUsageInsteadOfKsp
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation("it.xabaras.android:recyclerview-swipedecorator:1.4")
 
     implementation ("com.github.krushang06:okhttp:1.0.0")
-
-
-
 
 }

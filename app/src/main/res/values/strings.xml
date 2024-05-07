@@ -4,5 +4,8 @@
     <string name="ap">apJokeApp</string>
     <string name="app">appJokeApp</string>
     <string name="app_">apppJokeApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

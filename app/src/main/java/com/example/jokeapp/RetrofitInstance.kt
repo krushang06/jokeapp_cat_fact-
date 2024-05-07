@@ -1,73 +1,53 @@
 package com.example.jokeapp
 
-import com.example.mytoasty.AppMaticNetworkInterceptorr
-import com.shakebugs.shake.Shake
-import com.shakebugs.shake.Shake.insertNetworkRequest
-import com.shakebugs.shake.network.NetworkRequestBuilder
-import com.shakebugs.shake.network.ShakeNetworkInterceptor
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.Date
+import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-    //    private const val BASE_URL = "hps://official-joke-api.appspot.comtt/"
-    private var baseUrl = "https://catfact.ninja/"
-    fun getRetrofitInstance(): ApiInterface {
+    private var BASE_URL = "https://qoa6sfaa93.execute-api.ap-south-1.amazonaws.com/dev/"
+    private var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b206X2lkIjoiNjVjNWU5ODJmYjhhMTAzMWE1MzIyZjMzIiwidXNlcm5hbWUiOiJCYWJ1QDEyMyIsImN1c3RvbTpyb2xlIjoic3R1ZGVudCIsImJhdGNoSWQiOiI2NWFiOTg0ODYwMWY5N2U1MGIwOTQ2NGQiLCJpYXQiOjE3MTUwNjY4MjUsImV4cCI6MTcxNTE1MzIyNX0.NNrhKJcyWbWQcBIyfV_01duqsmWzjzjGz_Ps9M5-kjE"
 
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(AppMaticNetworkInterceptorr)
+    private fun getHttpClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val headerInterceptor = Interceptor { chain ->
+            val original = chain.request()
+
+            val requestBuilder = original.newBuilder()
+            token?.let {
+                requestBuilder.header("Authorization", "Bearer $it")
+                    .build()
+            }
+
+            val request = requestBuilder.build()
+            chain.proceed(request)
+        }
+        return OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.MINUTES)
+            .addInterceptor(interceptor)
+            .addInterceptor(headerInterceptor)
             .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl) // Use dynamic base URL
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        return retrofit.create(ApiInterface::class.java)
     }
-}
 
-
-
-/*object RetrofitInstance {
-    // original app
-    private const val BASE_URL = "https://catfact.ninja/"
-
-    fun getRetrofitInstance(): ApiInterface {
-
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(AppMaticNetworkInterceptorr)
-            .build()
-
+    fun getRetrofitInstance(baseUrl: String? = null): ApiInterface {
+        baseUrl?.let {
+            BASE_URL = it
+        }
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(getHttpClient())
             .build()
 
         return retrofit.create(ApiInterface::class.java)
     }
-}*/
 
-
-//object RetrofitInstance {
-//
-//    private const val BASE_URL = "https://catfact.ninja/"
-//
-//    fun getRetrofitInstance(): ApiInterface {
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .client(OkHttpClient())  // Use the custom OkHttpClient
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        return retrofit.create(ApiInterface::class.java)
-//    }
-//    fun HttpLoggingInterceptor(): OkHttpClient {
-//        var httpLoggingInterceptor = HttpLoggingInterceptor()
-//        httpLoggingInterceptor = HttpLoggingInterceptor()
-//        return httpLoggingInterceptor
-//    }
-//}
-
+}
