@@ -7,10 +7,6 @@ data class responceDataClass(
     @SerializedName("count" ) var count: Int?  = null
 )
 data class Datas(
-    @SerializedName("courseDetails"    ) var courseDetails    : CourseDetails?          = CourseDetails(),
-    @SerializedName("instituteDetails" ) var instituteDetails : InstituteDetails?       = InstituteDetails(),
-    @SerializedName("branchDetails"    ) var branchDetails    : BranchDetails?          = BranchDetails(),
-    @SerializedName("subjectDetails"   ) var subjectDetails   : SubjectDetails?         = SubjectDetails(),
     @SerializedName("_id"              ) var Id               : String?                 = null,
     @SerializedName("name"             ) var name             : String?                 = null,
     @SerializedName("createdBy"        ) var createdBy        : String?                 = null,
@@ -21,7 +17,6 @@ data class Datas(
     @SerializedName("totalQuestions"   ) var totalQuestions   : Int?                    = null,
     @SerializedName("releaseDate"      ) var releaseDate      : String?                 = null,
     @SerializedName("isActive"         ) var isActive         : Boolean?                = null,
-    @SerializedName("batchDetails"     ) var batchDetails     : ArrayList<BatchDetails> = arrayListOf(),
     @SerializedName("createdAt"        ) var createdAt        : String?                 = null,
     @SerializedName("updatedAt"        ) var updatedAt        : String?                 = null,
     @SerializedName("__v"              ) var _v               : Int?                    = null
@@ -31,13 +26,6 @@ data class Questions (
 
     @SerializedName("questionId" ) var questionId : QuestionId? = QuestionId(),
     @SerializedName("marks"      ) var marks      : Int?        = null
-
-)
-data class BatchDetails (
-
-    @SerializedName("id"   ) var id   : String? = null,
-    @SerializedName("name" ) var name : String? = null
-
 )
 data class QuestionId (
 
@@ -52,37 +40,8 @@ data class QuestionId (
     @SerializedName("processingId" ) var processingId : String?            = null,
     @SerializedName("__v"          ) var _v           : Int?               = null,
     @SerializedName("subQuestions" ) var subQuestions : ArrayList<String>  = arrayListOf()
-
 )
 
-data class CourseDetails (
-
-    @SerializedName("id"   ) var id   : String? = null,
-    @SerializedName("name" ) var name : String? = null
-
-)
-data class InstituteDetails (
-
-    @SerializedName("id"   ) var id   : String? = null,
-    @SerializedName("name" ) var name : String? = null
-
-)
-data class BranchDetails (
-
-    @SerializedName("id"   ) var id   : String? = null,
-    @SerializedName("name" ) var name : String? = null
-
-)
-data class SubjectDetails (
-
-    @SerializedName("subjectId"   ) var subjectId   : String? = null,
-    @SerializedName("subjectName" ) var subjectName : String? = null,
-    @SerializedName("chapterId"   ) var chapterId   : String? = null,
-    @SerializedName("chapterName" ) var chapterName : String? = null,
-    @SerializedName("topicId"     ) var topicId     : String? = null,
-    @SerializedName("topicName"   ) var topicName   : String? = null
-
-)
 data class Options (
 
     @SerializedName("option" ) var option : String? = null,

@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
     private var BASE_URL = "https://qoa6sfaa93.execute-api.ap-south-1.amazonaws.com/dev/"
-    private var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b206X2lkIjoiNjVjNWU5ODJmYjhhMTAzMWE1MzIyZjMzIiwidXNlcm5hbWUiOiJCYWJ1QDEyMyIsImN1c3RvbTpyb2xlIjoic3R1ZGVudCIsImJhdGNoSWQiOiI2NWFiOTg0ODYwMWY5N2U1MGIwOTQ2NGQiLCJpYXQiOjE3MTUwNjY4MjUsImV4cCI6MTcxNTE1MzIyNX0.NNrhKJcyWbWQcBIyfV_01duqsmWzjzjGz_Ps9M5-kjE"
+//    token hedar pass
+    private var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b206X2lkIjoiNjVjNWU5ODJmYjhhMTAzMWE1MzIyZjMzIiwidXNlcm5hbWUiOiJCYWJ1QDEyMyIsImN1c3RvbTpyb2xlIjoic3R1ZGVudCIsImJhdGNoSWQiOiI2NWFiOTg0ODYwMWY5N2U1MGIwOTQ2NGQiLCJpYXQiOjE3MTUxNTMzNTQsImV4cCI6MTcxNTIzOTc1NH0.myRoQpUpFu_AFR5iwIco5yW8XXd8LzAYZS-1lu66tGA"
 
     private fun getHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor().apply {
